@@ -1,0 +1,80 @@
+<form
+  class="form form--register"
+  id="register"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field class="input__field" appearance="fill">
+    <mat-label>E-mail</mat-label>
+    <input
+      matInput
+      type="email"
+      formControlName="email"
+      placeholder="geo@tikexample.com"
+    />
+    <mat-icon
+      class="input__icon--check"
+      [ngClass]="form['email'].valid ? 'visible' : 'hidden'"
+      matSuffix
+      >done</mat-icon
+    >
+    <mat-error *ngIf="!registerForm.valid"
+      >You must enter e-mail adress</mat-error
+    >
+    <mat-icon
+      class="input__icon--tooltip"
+      matTooltip='E-mail must have valid pattern. For example: "geo@tikexample.com"'
+      matTooltipPosition="after"
+      >info</mat-icon
+    >
+  </mat-form-field>
+  <mat-form-field class="input__field" appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput #password type="password" formControlName="password" />
+    <mat-icon
+      class="input__icon--check"
+      [ngClass]="form['password'].valid ? 'visible' : 'hidden'"
+      matSuffix
+      >done</mat-icon
+    >
+    <mat-error *ngIf="!registerForm.valid">Wrong password pattern</mat-error>
+    <mat-icon
+      class="input__icon--tooltip"
+      matTooltip="Password must be at least 8 characters long and includes 1 uppercase letter, 1 lowercase letter and 1 digit."
+      matTooltipPosition="after"
+      >info</mat-icon
+    >
+  </mat-form-field>
+
+  <p>Password strength:</p>
+  <mat-password-strength
+    [enableSpecialCharRule]="false"
+    [password]="password.value"
+    class="progress__bar"
+  >
+  </mat-password-strength>
+
+  <mat-form-field class="input__field" appearance="fill">
+    <mat-label>Repeat password</mat-label>
+    <input matInput type="password" formControlName="confirmPassword" />
+    <mat-error
+      *ngIf="form['confirmPassword'].dirty || registerForm.errors?.['passwordsDoNotMatch']"
+      >Passwords do not match</mat-error
+    >
+  </mat-form-field>
+</form>
+
+<div>
+  <button
+    mat-raised-button
+    form="register"
+    type="submit"
+    color="primary"
+    [disabled]="!registerForm.valid"
+  >
+    Register
+  </button>
+  <p class="error__message" *ngIf="isErrorOccur">
+    There is some problem with the server. Please try again later.
+  </p>
+</div>

@@ -1,0 +1,18 @@
+.input {
+  &__icon--check {
+    color: rgb(0, 184, 24);
+    transform: scale(1.2);
+  }
+}
+
+.error {
+  &__message {
+    max-width: 320px;
+  }
+}
+
+.progress {
+  &__bar {
+    width: 50%;
+  }
+}
