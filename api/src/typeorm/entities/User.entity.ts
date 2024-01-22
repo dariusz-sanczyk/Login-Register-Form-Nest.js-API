@@ -1,14 +1,15 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
-export class Login extends BaseEntity {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn({
-    comment: 'User unique ID',
+    type: 'bigint',
   })
   id: number;
 
   @Column({
     type: 'varchar',
+    unique: true,
   })
   email: string;
 
@@ -19,7 +20,7 @@ export class Login extends BaseEntity {
 
   @Column({
     type: 'timestamp',
-    default: '2024-01-01 12:00:00',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   created_at: Date;
 }
