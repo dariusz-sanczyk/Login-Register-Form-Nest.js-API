@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm/entities/User.entity';
 import { CreatUserParams } from 'src/utils/types';
 import { Repository } from 'typeorm';
-import { UpdateUserDto } from './dtos/update-user.dto';
+import { UpdateUserDto } from '../../dtos/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +23,11 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  updateUser(id: number, password: string) {
-    return this.userRepository.update({ id }, { password });
+  updateUser(id: number, userDetails: UpdateUserDto) {
+    return this.userRepository.update({ id }, { ...userDetails });
+  }
+
+  deletUserById(id: number) {
+    return this.userRepository.delete({ id });
   }
 }

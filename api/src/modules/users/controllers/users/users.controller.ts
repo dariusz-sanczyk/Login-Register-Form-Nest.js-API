@@ -1,15 +1,17 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
   ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dtos/create-user.dto';
-import { UpdateUserDto } from './dtos/update-user.dto';
+import { UsersService } from '../../services/users/users.service';
+import { CreateUserDto } from '../../dtos/create-user.dto';
+import { UpdateUserDto } from '../../dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -19,7 +21,7 @@ export class UsersController {
     return this.usersService.findAllUsers();
   }
 
-  @Get('/:id')
+  @Get(':id')
   getuserByID(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findUserById(id);
   }
@@ -29,11 +31,17 @@ export class UsersController {
     return this.usersService.createUser(body);
   }
 
-  @Patch('/:id')
+  @Patch(':id')
   async updateUser(
     @Body() body: UpdateUserDto,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    await this.usersService.updateUser(id, body.password);
+    await this.usersService.updateUser(id, body);
+  }
+
+  @Delete(':id')
+  @HttpCode(204)
+  async deleteUserById(@Param('id', ParseIntPipe) id: number) {
+    await this.usersService.deletUserById(id);
   }
 }
