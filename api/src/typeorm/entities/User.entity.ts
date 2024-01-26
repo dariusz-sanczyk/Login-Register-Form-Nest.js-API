@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Profile } from './Profile.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -23,4 +31,7 @@ export class User extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   created_at: Date;
+  @OneToOne(() => Profile)
+  @JoinColumn()
+  profile: Profile;
 }

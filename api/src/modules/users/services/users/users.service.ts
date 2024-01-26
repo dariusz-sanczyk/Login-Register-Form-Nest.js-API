@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm/entities/User.entity';
 import { CreatUserParams } from 'src/utils/types';
@@ -11,11 +11,18 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
   findAllUsers() {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['profile'] });
   }
 
-  findUserById(id: number) {
-    return this.userRepository.findOneBy({ id });
+  async findUserById(id: number) {
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    user.profile = await this.userRepository
+      .createQueryBuilder()
+      .relation('profile')
+      .of(user)
+      .loadOne();
+    return user;
   }
 
   createUser(userCredentials: CreatUserParams) {
