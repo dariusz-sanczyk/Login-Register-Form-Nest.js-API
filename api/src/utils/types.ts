@@ -2,7 +2,10 @@ export type CreatUserParams = {
   email: string;
   password: string;
 };
-
+export type UserCredentialsParams = {
+  email: string;
+  password: string;
+};
 export type CreateUserProfile = {
   firstName: string;
   lastName: string;

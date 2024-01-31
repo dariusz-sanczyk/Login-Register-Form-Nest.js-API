@@ -25,8 +25,8 @@ export class UsersService {
     return user;
   }
 
-  createUser(userCredentials: CreatUserParams) {
-    const newUser = this.userRepository.create({ ...userCredentials });
+  createUser(userData: CreatUserParams) {
+    const newUser = this.userRepository.create({ ...userData });
     return this.userRepository.save(newUser);
   }
 
@@ -36,5 +36,12 @@ export class UsersService {
 
   deletUserById(id: number) {
     return this.userRepository.delete({ id });
+  }
+
+  async resetPassword(email: string) {
+    const user = await this.userRepository.findOneBy({ email });
+    if (!user)
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    return user;
   }
 }
