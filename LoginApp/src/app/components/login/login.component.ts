@@ -51,6 +51,9 @@ export class LoginComponent implements OnInit {
           if (err.status === 401) {
             this.isLoginError = true;
             this.errorMessage = 'Wrong e-mail or password !';
+          } else if (err.status === 404) {
+            this.isLoginError = true;
+            this.errorMessage = 'User not found.';
           } else {
             this.isServerError = true;
             this.errorMessage =

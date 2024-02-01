@@ -46,7 +46,7 @@ export class ResetpasswordComponent implements OnInit {
         setTimeout(() => this.goToLogin(), 5000);
       },
       error: (err) => {
-        if (err.status === 400) {
+        if (err.status === 404) {
           this.isEmailNotFound = true;
           this.errorMessage = 'Email not found in the database !';
         } else {
