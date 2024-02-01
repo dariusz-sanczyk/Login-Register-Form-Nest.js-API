@@ -10,8 +10,15 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
+
   findAllUsers() {
     return this.userRepository.find({ relations: ['profile'] });
+  }
+
+  async findUser(email: string) {
+    const user = await this.userRepository.findOneBy({ email });
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    return user;
   }
 
   async findUserById(id: number) {
