@@ -43,6 +43,7 @@ button {
   height: 500px;
   &--reset {
     height: auto;
+    min-width: 300px;
   }
 }
 
