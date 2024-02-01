@@ -4,6 +4,7 @@ import { UsersService } from '../users/users.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm/entities/User.entity';
 import { Repository } from 'typeorm';
+import { comparePasswords } from 'src/utils/bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -12,17 +13,19 @@ export class AuthService {
     private usersService: UsersService,
   ) {}
 
-  async logIn(username: string, passwrd: string): Promise<any> {
-    const user = await this.usersService.findUser(username);
-    if (user.password !== passwrd) {
+  async logIn(email: string, passwrd: string): Promise<any> {
+    const user = await this.usersService.findUser(email);
+    const isPasswordsMatched = await comparePasswords(passwrd, user.password);
+    if (isPasswordsMatched) {
+      user.profile = await this.userRepository
+        .createQueryBuilder()
+        .relation('profile')
+        .of(user)
+        .loadOne();
+      const { password, ...userData } = user;
+      return userData;
+    } else {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
-    user.profile = await this.userRepository
-      .createQueryBuilder()
-      .relation('profile')
-      .of(user)
-      .loadOne();
-    const { password, ...userData } = user;
-    return userData;
   }
 }

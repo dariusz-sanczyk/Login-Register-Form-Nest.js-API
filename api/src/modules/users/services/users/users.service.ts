@@ -4,6 +4,7 @@ import { User } from 'src/typeorm/entities/User.entity';
 import { CreatUserParams } from 'src/utils/types';
 import { Repository } from 'typeorm';
 import { UpdateUserDto } from '../../dtos/update-user.dto';
+import { hashPassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -32,8 +33,9 @@ export class UsersService {
     return user;
   }
 
-  createUser(userData: CreatUserParams) {
-    const newUser = this.userRepository.create({ ...userData });
+  async createUser(userData: CreatUserParams) {
+    const password = await hashPassword(userData.password);
+    const newUser = this.userRepository.create({ ...userData, password });
     return this.userRepository.save(newUser);
   }
 
