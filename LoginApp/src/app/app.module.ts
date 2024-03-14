@@ -31,14 +31,14 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     BrowserAnimationsModule,
     RouterModule.forRoot([
       {
-        path: 'login',
+        path: '',
         component: MainpageComponent,
       },
       {
         path: 'reset',
         component: ResetpasswordComponent,
       },
-      { path: '**', redirectTo: 'login' },
+      { path: '**', redirectTo: '' },
     ]),
     ReactiveFormsModule,
     HttpClientModule,
