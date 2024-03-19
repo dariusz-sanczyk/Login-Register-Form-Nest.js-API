@@ -16,7 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     MainpageComponent,
     RegisterComponent,
     ResetpasswordComponent,
+    PopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     MatProgressBarModule,
     MatIconModule,
     MatTooltipModule,
+    MatDialogModule,
     MatPasswordStrengthModule.forRoot(),
   ],
   providers: [],

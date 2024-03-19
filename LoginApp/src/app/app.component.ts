@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { fader } from './route-animations';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,8 @@ import { fader } from './route-animations';
 })
 export class AppComponent {
   title = 'LoginApp';
+
+  constructor(private dialogRef: MatDialog) {
+    this.dialogRef.open(PopUpComponent);
+  }
 }
