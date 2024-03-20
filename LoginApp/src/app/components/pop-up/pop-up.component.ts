@@ -1,11 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pop-up',
