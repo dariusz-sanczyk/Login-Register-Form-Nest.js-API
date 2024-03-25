@@ -46,10 +46,4 @@ export class UsersService {
   deletUserById(id: number) {
     return this.userRepository.delete({ id });
   }
-
-  async resetPassword(email: string) {
-    const user = await this.userRepository.findOneBy({ email });
-    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    return user;
-  }
 }

@@ -12,7 +12,6 @@ import {
 import { UsersService } from '../../services/users/users.service';
 import { CreateUserDto } from '../../dtos/create-user.dto';
 import { UpdateUserDto } from '../../dtos/update-user.dto';
-import { ResetPasswordDto } from '../../dtos/reset-password.dto';
 
 @Controller('users')
 export class UsersController {
@@ -45,10 +44,5 @@ export class UsersController {
   @HttpCode(204)
   async deleteUserById(@Param('id', ParseIntPipe) id: number) {
     await this.usersService.deletUserById(id);
-  }
-
-  @Post('resetPassword')
-  async resetUserPassword(@Body() body: ResetPasswordDto) {
-    await this.usersService.resetPassword(body.email);
   }
 }
