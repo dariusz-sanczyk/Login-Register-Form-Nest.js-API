@@ -30,6 +30,10 @@ export class PasswordController {
       subject: 'Reset your password for LoginApp account.',
       html: `Click <a href="${url}">here</a> to reset your password.`,
     });
+
+    return {
+      message: 'Please check your email',
+    };
   }
 
   @Post('reset')
