@@ -10,4 +10,7 @@ export class PasswordReset extends BaseEntity {
 
   @Column({ type: 'varchar', unique: true })
   token: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date;
 }

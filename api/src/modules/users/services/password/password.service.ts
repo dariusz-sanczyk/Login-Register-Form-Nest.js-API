@@ -21,10 +21,4 @@ export class PasswordService {
   findOne(token) {
     return this.passwordRepository.findOneBy(token);
   }
-
-  async resetPassword(email: any) {
-    const user = await this.userRepository.findOneBy({ email });
-    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    return user;
-  }
 }

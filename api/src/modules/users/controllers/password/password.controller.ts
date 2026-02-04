@@ -5,6 +5,7 @@ import { PasswordService } from '../../services/password/password.service';
 import { MailerService } from '@nestjs-modules/mailer';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '../../services/users/users.service';
+import { hashPassword } from 'src/utils/bcrypt';
 
 @Controller('resetpassword')
 export class PasswordController {
@@ -36,6 +37,7 @@ export class PasswordController {
   async reset(@Body() body: ResetPasswordDto) {
     const passwordToReset = await this.passwordService.findOne(body.token);
     const user = await this.userService.findUser(passwordToReset.email);
-    await this.passwordService.resetPassword(user);
+    const password = await hashPassword(body.password);
+    await this.userService.updateUser(user.id, { password: password });
   }
 }
