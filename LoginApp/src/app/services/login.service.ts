@@ -20,7 +20,7 @@ export class LoginService {
 
   public resetPassword(resetEmail: Email) {
     return this._http.post(
-      `${environment.baseUrl}/resetpassword/email`,
+      `${environment.baseUrl}/resetPassword/email`,
       resetEmail
     );
   }
