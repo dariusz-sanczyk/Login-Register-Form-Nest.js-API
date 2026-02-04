@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public goToReset() {
-    this._router.navigate(['/reset']);
+  public goToForgot() {
+    this._router.navigate(['/forgot']);
   }
 
   public onSubmit(form: User) {
