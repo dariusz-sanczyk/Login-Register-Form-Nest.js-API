@@ -4,10 +4,6 @@ This is a simple web application. As for now you can register an account and
 try to login.  
 More features **SOON...** 🙂
 
-### Link to repository
-
-[https://github.com/dariusz-sanczyk/Login-Register-Form-Nest.js-API](https://github.com/dariusz-sanczyk/Login-Register-Form-Nest.js-API)
-
 ### Technologies used
 
 - Angular 14+
