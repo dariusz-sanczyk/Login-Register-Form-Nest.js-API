@@ -29,7 +29,7 @@ export class PasswordController {
     await this.mailerService.sendMail({
       to: body.email,
       subject: 'Reset your password for LoginApp account.',
-      html: `Click <a href="${url}">here</a> to reset your password.`,
+      html: `Click <a href="${url}">${url}</a> to reset your password.`,
     });
 
     return {

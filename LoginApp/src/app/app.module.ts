@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -34,21 +34,7 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: MainpageComponent,
-      },
-      {
-        path: 'forgot',
-        component: ForgotpasswordComponent,
-      },
-      {
-        path: 'reset',
-        component: ResetpasswordComponent,
-      },
-      { path: '**', redirectTo: '' },
-    ]),
+    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatTabsModule,
